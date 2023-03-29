@@ -1,32 +1,23 @@
-﻿namespace SpinTEK;
+﻿using Nager.Date.Model;
+
+namespace SpinTEK;
 
 public class Calendar
 {
-    private List<DateTime> _holidays;
+    private IEnumerable<PublicHoliday> _holidays;
     
-    public Calendar(int year)
+    public Calendar(IEnumerable<PublicHoliday> holidays)
     {
-        GenerateHolidays();
+        _holidays = holidays;
     }
 
-    private void GenerateHolidays()
-    {
-        
+    public IEnumerable<PublicHoliday> GetPublicHolidays() {
+        return _holidays;
     }
     
-    private List<DateTime> publicHolidays = new List<DateTime>
-    {
-        new DateTime()
-    };
-        
 
-    public static bool isHoliday(DateTime)
+    public static bool isHoliday(DateTime date)
     {
-        
-    }
-    
-    public static List<DateTime> GetPublicHolidays()
-    {
-        
+        return true;
     }
 }

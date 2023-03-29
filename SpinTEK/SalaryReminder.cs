@@ -1,17 +1,21 @@
-﻿namespace SpinTEK;
+﻿using Nager.Date;
+
+namespace SpinTEK;
 
 public class SalaryReminder
 {
-    private int _inputYear;
     private Calendar _calendar;
+    private int _inputYear;
     
     private List<DateTime>? _payDays = new List<DateTime>();
     private List<DateTime>? _reminderDays = new List<DateTime>();
-    
+
     public SalaryReminder(string year)
     {
         _inputYear = Convert.ToInt32(year);
-        _calendar = new Calendar(_inputYear);
+        var holidays = DateSystem.GetPublicHolidays(_inputYear, Nager.Date.CountryCode.EE);
+        _calendar = new Calendar(holidays);
+        Console.WriteLine(holidays);
     }
     
     public void CreateSalaryReminder()
@@ -26,6 +30,11 @@ public class SalaryReminder
             _payDays!.Add(salaryDate);
             _reminderDays!.Add(reminderDate);
         }
+    }
+
+    public void WriteToCsv()
+    {
+        
     }
 
 

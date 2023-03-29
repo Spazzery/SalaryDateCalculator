@@ -3,7 +3,7 @@
 public static class Calculator
 {
 
-    private static DateTime CalculateSalaryDate(DateTime salaryDate)
+    public static DateTime CalculateSalaryDate(DateTime salaryDate)
     {
         if (salaryDate.DayOfWeek == DayOfWeek.Saturday)
             return salaryDate.AddDays(-1);
@@ -17,7 +17,7 @@ public static class Calculator
             return salaryDate;
     }
 
-    private static DateTime CalculateWhenOnHoliday(DateTime inputDate)
+    public static DateTime CalculateWhenOnHoliday(DateTime inputDate)
     {
         while (Calendar.isHoliday(inputDate))
             inputDate = inputDate.AddDays(-1);
@@ -26,11 +26,13 @@ public static class Calculator
             return inputDate.AddDays(-1);
         else if (inputDate.DayOfWeek == DayOfWeek.Sunday)
             return inputDate.AddDays(-2);
+
+        throw new NotImplementedException();
     }
 
-    private static DateTime CalculateReminderDate(DateTime salaryDate)
+    public static DateTime CalculateReminderDate(DateTime salaryDate)
     {
-        
+        throw new NotImplementedException();
     }
     
 }
