@@ -9,7 +9,9 @@ class Program
             string inputYear = args[0];
 
             SalaryReminder salaryReminder = new SalaryReminder(inputYear);
-            // salaryReminder.CreateSalaryReminder();
+            salaryReminder.CreateSalaryReminder();
+            salaryReminder.CreateTable();
+            // salaryReminder.WriteToCsv();
         }
         else             
             Console.WriteLine("No arguments given!");

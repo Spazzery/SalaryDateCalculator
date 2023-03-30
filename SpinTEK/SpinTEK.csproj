@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="Nager.Date" Version="1.40.0" />
+      <PackageReference Include="PublicHoliday" Version="2.27.0" />
     </ItemGroup>
 
 </Project>
