@@ -52,19 +52,25 @@ public class SalaryReminder
         return reminderDate;
     }
 
-    public void CreateTable()
+    public void CreateAndShowTable()
     {
         StringBuilder tableContents = new StringBuilder();
         tableContents.Append("+------------------+------------------+");
         tableContents.Append("\n");
-        tableContents.Append($"|   Salary Date    |   Reminder Date  |");
+        tableContents.Append("|   Salary Date    |   Reminder Date  |");
         tableContents.Append("\n");
         tableContents.Append("+------------------+------------------+");
         tableContents.Append("\n");
 
-        for (int i = 0; i < 12; i++)
+        int totalLength = 18;
+        for (int i = 0; i < _payDays!.Count; i++)
         {
-            tableContents.Append("| " + _payDays![i].ToString("dd/MM/yyyy") + " | " + _reminderDays![i].ToString("dd/MM/yyyy") + " |");
+            string payday = _payDays![i].ToString("dd/MM/yyyy");
+            string reminderDay = _reminderDays![i].ToString("dd/MM/yyyy");
+            
+            tableContents.Append("|" + 
+                                 payday.PadLeft((totalLength - payday.Length) / 2 + payday.Length).PadRight(totalLength) + "|" + 
+                                 reminderDay.PadLeft((totalLength - reminderDay.Length) / 2 + reminderDay.Length).PadRight(totalLength)  + "|");
             tableContents.Append("\n");
         }
 
@@ -73,14 +79,19 @@ public class SalaryReminder
         _table = tableContents.ToString();
 
         Console.WriteLine(_table);
-
     }
-    
+
     public void WriteToCsv()
     {
-        
+        using StreamWriter sw = new StreamWriter(_year.ToString() + ".csv");
+        sw.WriteLine("salary date,reminder date");
+
+        for (int i = 0; i < _payDays!.Count; i++)
+            sw.WriteLine($"{_payDays[i].ToString("dd/MM/yyyy")},{_reminderDays![i].ToString("dd/MM/yyyy")}");
+
+        Console.WriteLine("Finished writing into CSV!");
     }
-    
+
     private int ConvertToInt(string year)
     {
         int result;
