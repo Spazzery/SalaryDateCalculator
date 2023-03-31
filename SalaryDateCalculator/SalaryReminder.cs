@@ -18,7 +18,7 @@ public class SalaryReminder
         _year = ConvertToInt(year);
         _calendar = new Calendar(new EstoniaPublicHoliday().PublicHolidays(_year));
     }
-    
+
     public void CreateSalaryReminder()
     {
         for (int i = 0; i < 12; i++)
@@ -27,7 +27,7 @@ public class SalaryReminder
 
             salaryDate = CalculateSalaryDate(salaryDate);
             DateTime reminderDate = CalculateReminderDate(salaryDate);
-            
+
             _payDays!.Add(salaryDate);
             _reminderDays!.Add(reminderDate);
         }
@@ -36,7 +36,8 @@ public class SalaryReminder
 
     private DateTime CalculateSalaryDate(DateTime salaryDate)
     {
-        if (salaryDate.DayOfWeek == DayOfWeek.Saturday || salaryDate.DayOfWeek == DayOfWeek.Sunday || _calendar.IsHoliday(salaryDate))
+        if (salaryDate.DayOfWeek == DayOfWeek.Saturday || salaryDate.DayOfWeek == DayOfWeek.Sunday ||
+            _calendar.IsHoliday(salaryDate))
             return new EstoniaPublicHoliday().PreviousWorkingDay(salaryDate);
         else
             return salaryDate;
@@ -45,8 +46,8 @@ public class SalaryReminder
     private DateTime CalculateReminderDate(DateTime salaryDate)
     {
         DateTime reminderDate = salaryDate;
-        
-        for (int i = 0; i < 3; i++) 
+
+        for (int i = 0; i < 3; i++)
             reminderDate = new EstoniaPublicHoliday().PreviousWorkingDayNotSameDay(reminderDate);
 
         return reminderDate;
@@ -67,10 +68,12 @@ public class SalaryReminder
         {
             string payday = _payDays![i].ToString("dd/MM/yyyy");
             string reminderDay = _reminderDays![i].ToString("dd/MM/yyyy");
-            
-            tableContents.Append("|" + 
-                                 payday.PadLeft((totalLength - payday.Length) / 2 + payday.Length).PadRight(totalLength) + "|" + 
-                                 reminderDay.PadLeft((totalLength - reminderDay.Length) / 2 + reminderDay.Length).PadRight(totalLength)  + "|");
+
+            tableContents.Append("|" +
+                                 payday.PadLeft((totalLength - payday.Length) / 2 + payday.Length)
+                                     .PadRight(totalLength) + "|" +
+                                 reminderDay.PadLeft((totalLength - reminderDay.Length) / 2 + reminderDay.Length)
+                                     .PadRight(totalLength) + "|");
             tableContents.Append("\n");
         }
 
@@ -95,16 +98,18 @@ public class SalaryReminder
     private int ConvertToInt(string year)
     {
         int result;
-        try {
+        try
+        {
             result = Convert.ToInt32(year);
         }
-        catch (FormatException e)
+        catch (FormatException)
         {
             throw new FormatException("Input number is not a valid year: " + year);
         }
+        
+        if (result < 1 || result > 9999)
+            throw new ArgumentException("Input year can't be lower than 1 or higher than 9999");
 
         return result;
     }
-
-
 }
