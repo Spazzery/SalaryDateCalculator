@@ -89,7 +89,7 @@ public class SalaryReminder
         for (int i = 0; i < _payDays!.Count; i++)
             sw.WriteLine($"{_payDays[i].ToString("dd/MM/yyyy")},{_reminderDays![i].ToString("dd/MM/yyyy")}");
 
-        Console.WriteLine("Finished writing into CSV!");
+        Console.WriteLine("Finished writing into CSV! Output file: " + _year.ToString() + ".csv");
     }
 
     private int ConvertToInt(string year)

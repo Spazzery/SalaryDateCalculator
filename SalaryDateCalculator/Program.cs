@@ -33,7 +33,7 @@ class Program
     private static void ShowHelp()
     {
         Console.WriteLine("-------------------------");
-        Console.WriteLine("Usage: spintek.exe <command> <year>");
+        Console.WriteLine("Usage: SalaryDateCalculator.exe <command> <year>");
         Console.WriteLine("Available commands:");
         Console.WriteLine("Show - prints the table into CLI");
         Console.WriteLine("Write - writes the result into a CSV file");
